@@ -104,3 +104,11 @@ main { padding-bottom: max(28px, env(safe-area-inset-bottom)); }
 .startup-symbol rect { transform-box: fill-box; transform-origin: center; animation: startup-tile 480ms cubic-bezier(.16, 1, .3, 1) both; animation-delay: calc(120ms + var(--tile) * 65ms); }
 @keyframes startup-tile { from { opacity: 0; transform: scale(.35); } to { opacity: 1; transform: scale(1); } }
 @media(prefers-reduced-motion: reduce) { .startup-symbol rect { animation: none; } }
+
+.site-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-4); margin: 0 auto; padding: var(--space-5) max(var(--space-6), calc((100% - 1624px) / 2)); border-top: 1px solid var(--border); font-size: 12px; color: var(--muted); }
+.site-footer nav { display: flex; flex-wrap: wrap; gap: var(--space-5); }
+.site-footer a { color: inherit; text-decoration: none; }
+.site-footer a:hover { text-decoration: underline; }
+.legal-page { max-width: 800px; margin: 0 auto; padding: var(--space-6); min-height: 60vh; }
+.legal-page section { margin-top: var(--space-6); }
+.legal-page p { font-size: 14px; }

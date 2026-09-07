@@ -2,7 +2,7 @@ import { build } from 'esbuild';
 import { mkdir, cp, rm, readdir, readFile, writeFile } from 'node:fs/promises';
 import { deploymentMetadata } from './metadata.mjs';
 await mkdir('dist', { recursive: true });
-const staticFiles = ['privacy.html','manifest.webmanifest','icons','models','ort','vendor','licenses','face-decoder.js','face-worker.js','sw.js','LICENSE','favicon.svg','favicon.ico','og-image.png'];
+const staticFiles = ['impressum.html','privacy.html','manifest.webmanifest','icons','models','ort','vendor','licenses','face-decoder.js','face-worker.js','sw.js','LICENSE','favicon.svg','favicon.ico','og-image.png'];
 for (const file of staticFiles) await cp(file, `dist/${file}`, { recursive: true });
 await build({ entryPoints: ['src/app.js','src/speech-worker.js'], bundle: true, format: 'esm', target: ['es2022'], outdir: 'dist', minify: true, legalComments: 'eof' });
 for (const name of ['style.css','design-tokens.css','components.css']) await cp(`src/${name}`,`dist/${name}`);
