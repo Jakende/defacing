@@ -1,0 +1,26 @@
+# Installed dependencies and generated builds
+node_modules/
+dist/
+ios-app/www/
+ios-app/ios/App/App/public/
+ios-app/ios/App/App/capacitor.config.json
+ios-app/ios/capacitor-cordova-ios-plugins/
+ios-app/ios/App/Pods/
+ios-app/ios/App/build/
+ios-app/ios/App/DerivedData/
+
+# Local settings, credentials and test output
+.env
+.env.*
+!.env.example
+*.log
+*.p12
+*.mobileprovision
+*.xcuserstate
+xcuserdata/
+coverage/
+test-results/
+.DS_Store
+Thumbs.db
+.claude/
+.serena/

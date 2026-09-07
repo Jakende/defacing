@@ -1,0 +1,227 @@
+html,
+body {
+  height: 100%;
+}
+
+*,
+*::before,
+*::after {
+  transition: none;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: var(--fs-base);
+  line-height: var(--lh-base);
+  color: var(--ink);
+  background: var(--surface);
+  min-height: 100vh;
+}
+
+h1 {
+  margin: 0;
+  font-size: var(--h1-size);
+  font-weight: var(--h1-weight);
+  text-transform: uppercase;
+  letter-spacing: var(--h1-tracking);
+  line-height: 1.2;
+}
+
+h2,
+h3 {
+  margin: 0;
+  font-size: var(--h2-size);
+  font-weight: var(--h2-weight);
+  line-height: 1.25;
+}
+
+.label,
+label > span,
+.meta {
+  font-size: var(--label-size);
+  text-transform: uppercase;
+  letter-spacing: var(--label-tracking);
+  color: var(--muted);
+}
+
+a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+  transition: color 120ms linear;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  min-height: 36px;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  border: var(--border-width) solid var(--control-border);
+  background: var(--control-bg);
+  color: var(--control-ink);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: color 120ms linear, background-color 120ms linear, border-color 120ms linear;
+}
+
+button:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+input[type="search"],
+input[type="text"],
+input[type="email"],
+input[type="url"],
+select,
+textarea {
+  height: 34px;
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  border: var(--border-width) solid var(--border);
+  background: var(--surface);
+  color: var(--ink);
+  transition: color 120ms linear, background-color 120ms linear, border-color 120ms linear;
+}
+
+textarea {
+  min-height: 80px;
+  height: auto;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--muted);
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius);
+  border: var(--border-width) solid var(--border);
+  background: transparent;
+  display: inline-grid;
+  place-content: center;
+  vertical-align: middle;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: var(--ink);
+  transform: scale(0);
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+.panel {
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-2, var(--surface));
+}
+
+.surface-1 {
+  background: var(--surface);
+}
+
+.surface-2 {
+  background: var(--surface-2, var(--surface));
+}
+
+.surface-3 {
+  background: var(--surface-3, var(--surface-2, var(--surface)));
+}
+
+.is-active,
+[aria-current="page"],
+[aria-selected="true"],
+button[aria-pressed="true"] {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  border-color: currentColor;
+}
+
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled,
+[aria-disabled="true"] {
+  color: var(--muted);
+  border-color: var(--border);
+  background: var(--surface-2, var(--surface));
+  cursor: not-allowed;
+}
+
+.divider {
+  height: 1px;
+  background: var(--border);
+}
+
+/* Minimal legend (required for data palettes) */
+.legend {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.legend-title {
+  font-size: var(--label-size);
+  text-transform: uppercase;
+  letter-spacing: var(--label-tracking);
+  color: var(--muted);
+}
+
+.legend-scale {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 0;
+  border: var(--border-width) solid var(--border);
+}
+
+.legend-swatch {
+  height: 10px;
+}
+
+.chart-axis,
+.chart-domain {
+  stroke: var(--border);
+  fill: none;
+}
+
+.chart-grid,
+.chart-tick line {
+  stroke: var(--muted);
+  fill: none;
+}

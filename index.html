@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<meta name="description" content="Mask faces in photos and videos with Deface. Draw private masks, disguise speech, and export locally in your browser. No media uploads.">
+<title>Deface — Private Photo &amp; Video Editor</title>
+<link rel="icon" href="./favicon.svg?v=pixel-1" type="image/svg+xml">
+<link rel="alternate icon" href="./favicon.ico?v=pixel-1" sizes="16x16 32x32 48x48">
+<link rel="apple-touch-icon" href="./icons/icon-180.png" sizes="180x180">
+<link rel="manifest" href="./manifest.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Deface">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Deface — Private Photo &amp; Video Editor">
+<meta property="og:description" content="Mask faces. Keep your files on your device. Private photo and video editing in your browser.">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Deface — Private photo and video editing">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Deface — Private Photo &amp; Video Editor">
+<meta name="twitter:description" content="Mask faces. Keep your files on your device.">
+<meta name="twitter:image:alt" content="Deface — Private photo and video editing">
+<!-- deployment-metadata -->
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div id="startup" role="dialog" aria-modal="true" aria-label="Welcome to Deface">
+  <div class="startup-lockup">
+    <svg aria-hidden="true" focusable="false" class="startup-symbol" viewBox="0 0 44 44" fill="currentColor"><rect style="--tile:0" x="0" y="0" width="12" height="12"/><rect style="--tile:1" x="16" y="0" width="12" height="12"/><rect style="--tile:2" x="32" y="0" width="12" height="12"/><rect style="--tile:3" x="0" y="16" width="12" height="12"/><rect style="--tile:4" x="16" y="16" width="12" height="12"/><rect style="--tile:5" x="32" y="16" width="12" height="12"/><rect style="--tile:6" x="0" y="32" width="12" height="12"/><rect style="--tile:7" x="16" y="32" width="12" height="12"/><rect style="--tile:8" x="32" y="32" width="12" height="12"/></svg>
+    <div class="startup-wordmark"><span>DEFACE</span></div>
+    <p class="startup-caption">PRIVATE MEDIA EDITOR</p>
+    <div class="startup-rule" aria-hidden="true"><span></span></div>
+  </div>
+</div>
+<header><a class="brand" href="./" aria-label="Deface home"><svg aria-hidden="true" focusable="false" class="brand-symbol" viewBox="0 0 44 44" fill="currentColor"><rect x="0" y="0" width="12" height="12"/><rect x="16" y="0" width="12" height="12"/><rect x="32" y="0" width="12" height="12"/><rect x="0" y="16" width="12" height="12"/><rect x="16" y="16" width="12" height="12"/><rect x="32" y="16" width="12" height="12"/><rect x="0" y="32" width="12" height="12"/><rect x="16" y="32" width="12" height="12"/><rect x="32" y="32" width="12" height="12"/></svg><span>DEFACE</span></a><div class="header-actions"><button id="theme" type="button" aria-pressed="false">Light</button><button id="choose">Import</button></div></header>
+<main>
+<h1 class="sr-only">Deface — private photo and video editor</h1>
+<input id="file" type="file" accept="image/*,video/*,.mkv,.mov,.webm,.mp4" hidden>
+<div class="editor">
+<section class="workspace" aria-label="Media preview">
+<div class="workspace-bar"><span id="filename">Untitled</span><div class="preview-tabs" role="group" aria-label="Preview view"><button id="view-original" disabled aria-pressed="false">Original</button><button id="view-edited" disabled aria-pressed="true">Edited</button><button id="view-export" disabled aria-pressed="false">Export</button></div><span id="meta">IMAGE / VIDEO</span></div>
+<div id="stage" class="stage">
+<button id="empty" class="empty"><strong>Drop an image or video</strong><span>or click to import</span></button>
+<canvas id="preview" hidden aria-label="Mask preview. Draw with the selected tool."></canvas><video id="resultvideo" controls playsinline hidden></video><img id="resultimage" alt="Exported image" hidden>
+</div>
+<div class="timeline" id="timeline" hidden><button id="play" aria-label="Play preview" disabled>Play</button><input id="seek" aria-label="Video position" type="range" min="0" max="1" step="0.01" value="0"><output id="time">0:00</output><button id="mute" aria-label="Mute preview audio">Mute</button></div>
+<div class="workspace-footer"><span id="faces">No media</span><span id="previewstate"></span></div>
+</section>
+<aside>
+<fieldset id="settings"><legend>Mask</legend>
+<label class="check"><input id="automatic" type="checkbox" checked> Detect faces</label>
+<label for="mode">Style</label><select id="mode"><option value="solid">Solid</option><option value="pixelate">Pixelate</option></select>
+<div id="solidsettings"><label for="maskcolor">Mask colour</label><div class="colour-control"><input id="maskcolor" type="color" value="#101113" aria-label="Solid mask colour"><output id="colour-value">#101113</output></div></div>
+<div id="pixelsettings" hidden><label for="block">Pixel size <output id="blockval">24 px</output></label><input id="block" type="range" min="8" max="80" value="24"></div>
+<label for="padding">Face margin <output id="paddingval">25%</output></label><input id="padding" type="range" min="10" max="70" value="25">
+<div class="divider"></div>
+<label for="tool">Draw</label><select id="tool"><option value="brush">Brush</option><option value="rectangle">Rectangle</option></select>
+<div id="brushsettings"><label for="brushsize">Brush size <output id="brushval">8%</output></label><input id="brushsize" type="range" min="1" max="30" value="8"></div>
+<div class="history"><button id="undo" disabled title="Undo (⌘Z / Ctrl+Z)">Undo</button><button id="redo" disabled title="Redo (⇧⌘Z / Ctrl+Shift+Z)">Redo</button></div>
+<div class="divider"></div>
+<div id="videosettings" hidden><label for="audio">Audio</label><select id="audio"><option value="keep">Keep original</option><option value="disguise">Disguise voices</option><option value="remove">Remove audio</option></select><p id="voice-note" hidden>Targets estimated speech. Separation may affect other sounds; voices may still be identifiable.</p><label for="format">Format</label><select id="format"><option value="mp4">MP4</option><option value="webm">WebM</option></select></div>
+<label for="resolution">Max. resolution</label><select id="resolution"><option value="1280">1280 px</option><option value="1920" selected>1920 px</option><option value="3840">3840 px</option></select>
+</fieldset>
+<div class="export"><button id="export" class="full" disabled>Export <span aria-hidden="true">↓</span></button><button id="cancel" class="full" hidden>Cancel</button><progress id="progress" aria-label="Export progress" max="1" value="0" hidden></progress><p id="status" role="status" aria-live="polite"></p><a id="download" class="full download" hidden>Download ↓</a></div>
+<details class="help"><summary>Editing notes</summary><p>Draw to add masks. Video drawings stay fixed for the full clip. Pause to edit precisely.</p><p>Live detection may lag; export checks every frame. Review before sharing. Pixelation can leave faces identifiable. Disguise voices applies pitch shifting to estimated speech, then restores the residual background. Separation is imperfect; it does not guarantee anonymity.</p><p>Undo: ⌘Z / Ctrl+Z<br>Redo: ⇧⌘Z / Ctrl+Shift+Z</p></details>
+</aside>
+</div>
+
+<noscript>This editor requires JavaScript. Enable it and reload the page.</noscript>
+</main><script type="module" src="./app.js"></script>
+</body></html>

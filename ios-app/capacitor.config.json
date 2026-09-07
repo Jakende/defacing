@@ -1,0 +1,24 @@
+{
+  "appId": "city.bias.deface",
+  "appName": "Deface",
+  "webDir": "www",
+  "backgroundColor": "#000000",
+  "ios": {
+    "contentInset": "never",
+    "scheme": "DeFace",
+    "scrollEnabled": true,
+    "limitsNavigationsToAppBoundDomains": false,
+    "backgroundColor": "#000000"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchAutoHide": true,
+      "launchShowDuration": 0,
+      "backgroundColor": "#000000"
+    },
+    "StatusBar": {
+      "style": "LIGHT",
+      "backgroundColor": "#000000"
+    }
+  }
+}

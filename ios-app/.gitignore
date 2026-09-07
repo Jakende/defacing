@@ -1,0 +1,10 @@
+node_modules/
+www/
+ios/App/App/public/
+ios/App/App/capacitor.config.json
+ios/capacitor-cordova-ios-plugins/
+ios/App/build/
+ios/App/DerivedData/
+ios/App/Pods/
+xcuserdata/
+.DS_Store

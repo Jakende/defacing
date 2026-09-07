@@ -1,0 +1,13 @@
+Deface retains the MIT copyright notice in LICENSE for the original photo-editor implementation and YuNet decoder.
+
+Runtime components:
+- ONNX Runtime Web: Microsoft, MIT. See ONNXRUNTIME-LICENSE.
+- YuNet: OpenCV contributors, MIT. See YUNET-LICENSE.
+- Mediabunny 1.50.6: Vanilagy, MPL-2.0. The unmodified package source is available in the versioned npm package. See MEDIABUNNY-LICENSE.
+- DeepFilterNet3: Hendrik Schröter and contributors, Apache-2.0 / MIT dual licence; distributed here under Apache-2.0. See DEEPFILTERNET-LICENSE.
+- DeepFilterNet WASM JavaScript wrapper from deepfilter-standalone 1.0.2: MIT according to the published package. Adapted upstream from livekit-deepfilternet3-noise-filter. The wrapper is bundled without modification; retain the attribution below.
+
+DeepFilter wrapper attribution (published package README):
+This package reuses and builds upon code from livekit-deepfilternet3-noise-filter, which is licensed under the MIT License. Portions of WASM processing and model loading logic are directly adapted from the original project.
+
+Third-party package metadata may include their original repository URLs.
