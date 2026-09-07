@@ -210,3 +210,5 @@ Das Vorschaubild und der Text beim Teilen auf WhatsApp, LinkedIn, X/Twitter, Sla
 - Website-Favicon, Apple-Touch-Icon und PWA-Icons verwenden dasselbe Raster, weiß auf Schwarz mit ausreichendem Rand. Kein einzelner Buchstabe als Ersatzlogo.
 - `branding/favicon.svg` ist die Quelle der Website-Icons. `bash scripts/brand-assets.sh` erzeugt SVG-/ICO-/PNG-Varianten und die Social-Vorschau. Änderungen an iOS sind ein separater Arbeitsschritt.
 - Header und Startup-Zeichen invertieren mit dem gewählten Theme. Geometrie und Proportionen bleiben unverändert.
+
+- Deface-Social-Vorschau: ausschließlich das zentrierte Pixellogo und der Titel DEFACE, weiß auf Schwarz. Keine Untertitel, Trennlinien oder weiteren Texte. Format 1200×630 Pixel.
