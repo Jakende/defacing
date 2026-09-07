@@ -1,1 +1,27 @@
-{"name":"deface-local","version":"1.0.0","private":true,"type":"module","engines":{"node":">=22"},"scripts":{"build":"node scripts/build.mjs","start":"node server.mjs","test":"node --test tests/*.test.mjs"},"dependencies":{"@capacitor/core":"6.2.1","@capacitor/filesystem":"6.0.4","@capacitor/share":"6.0.4","@capacitor/status-bar":"6.0.3","deepfilter-standalone":"1.0.2","mediabunny":"1.50.6"},"devDependencies":{"esbuild":"0.25.12"}}
+{
+  "name": "deface-local",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "start": "node server.mjs",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "@capacitor/core": "6.2.1",
+    "@capacitor/filesystem": "6.0.4",
+    "@capacitor/share": "6.0.4",
+    "@capacitor/status-bar": "6.0.3",
+    "deepfilter-standalone": "1.0.2",
+    "mediabunny": "1.50.6"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.1"
+  },
+  "description": "Mask faces and disguise voices in photos and videos, locally in your browser.",
+  "homepage": "https://defacing.space/"
+}

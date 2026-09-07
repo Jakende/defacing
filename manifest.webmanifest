@@ -1,7 +1,7 @@
 {
-  "name": "Deface",
+  "name": "Deface \u2014 Face & Voice Anonymizer",
   "short_name": "Deface",
-  "description": "Mask faces in images and videos. All processing stays on your device.",
+  "description": "Mask faces and disguise voices in photos and videos. Everything is processed locally in your browser.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
