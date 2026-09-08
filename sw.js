@@ -1,4 +1,4 @@
-const CACHE = 'deface-v12';
+const CACHE = 'deface-v13';
 const ASSETS = ['./','./index.html','./impressum.html','./privacy.html','./app.js','./speech-worker.js','./style.css','./design-tokens.css','./components.css','./manifest.webmanifest','./icons/Github_black.svg','./icons/Github_white.svg','./favicon.svg','./favicon.ico','./icons/icon-180.png','./icons/icon-192.png','./icons/icon-512.png','./icons/icon-512-maskable.png','./face-decoder.js','./face-worker.js','./models/yunet.onnx','./ort/ort.min.js','./ort/ort-wasm-simd.wasm','./ort/ort-wasm.wasm'];
 const OPTIONAL = ['./vendor/deepfilter/pkg/df_bg.wasm','./vendor/deepfilter/models/DeepFilterNet3_onnx.tar.gz'];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)));self.skipWaiting();});

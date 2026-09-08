@@ -50,7 +50,7 @@
 <canvas id="preview" hidden aria-label="Mask preview. Draw with the selected tool."></canvas><video id="resultvideo" controls playsinline hidden></video><img id="resultimage" alt="Exported image" hidden>
 </div>
 <div class="timeline" id="timeline" hidden><button id="play" aria-label="Play preview" disabled>Play</button><input id="seek" aria-label="Video position" type="range" min="0" max="1" step="0.01" value="0"><output id="time">0:00</output><button id="mute" aria-label="Mute preview audio">Mute</button></div>
-<div id="save-actions" class="save-actions" hidden><button id="share-export" hidden>Save or share</button><a id="download" class="download" hidden>Download</a><p id="save-hint" hidden>Choose Save Image or Save Video if available in your device’s share menu.</p></div>
+
 <div class="workspace-footer"><span id="faces">No media</span><span id="previewstate"></span></div>
 </section>
 <aside>
@@ -68,7 +68,7 @@
 <div id="videosettings" hidden><label for="audio">Audio</label><select id="audio"><option value="keep">Keep original</option><option value="disguise">Disguise voices</option><option value="remove">Remove audio</option></select><p id="voice-note" hidden>Targets estimated speech. Separation may affect other sounds; voices may still be identifiable.</p><label for="format">Format</label><select id="format"><option value="mp4">MP4</option><option value="webm">WebM</option></select></div>
 <label for="resolution">Max. resolution</label><select id="resolution"><option value="1280">1280 px</option><option value="1920" selected>1920 px</option><option value="3840">3840 px</option></select>
 </fieldset>
-<div class="export"><button id="export" class="full" disabled>Export <span aria-hidden="true">↓</span></button><button id="cancel" class="full" hidden>Cancel</button><progress id="progress" aria-label="Export progress" max="1" value="0" hidden></progress><p id="status" role="status" aria-live="polite"></p></div>
+<div class="export"><button id="export" class="full" disabled>Export <span aria-hidden="true">↓</span></button><button id="cancel" class="full" hidden>Cancel</button><progress id="progress" aria-label="Export progress" max="1" value="0" hidden></progress><p id="status" role="status" aria-live="polite"></p><div id="save-actions" class="save-actions" hidden><button id="share-export" hidden>Save or share</button><a id="download" class="download" hidden>Download</a><p id="save-hint" hidden>Choose Save Image or Save Video if available in your device’s share menu.</p></div></div>
 <details class="help"><summary>Editing notes</summary><p>Draw to add masks. Video drawings stay fixed for the full clip. Pause to edit precisely.</p><p>Live detection may lag; export checks every frame. Review before sharing. Pixelation can leave faces identifiable. Disguise voices applies pitch shifting to estimated speech, then restores the residual background. Separation is imperfect; it does not guarantee anonymity.</p><p>Undo: ⌘Z / Ctrl+Z<br>Redo: ⇧⌘Z / Ctrl+Shift+Z</p></details>
 </aside>
 </div>
