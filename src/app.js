@@ -12,7 +12,7 @@ const preview = $('preview'), ctx = preview.getContext('2d');
 const raw = document.createElement('canvas'), rawCtx = raw.getContext('2d');
 const player = document.createElement('video'); player.playsInline = true; player.preload = 'auto';
 let file, input, sink, bitmap, boxes = [], regions = [], busy = false, loading = false, opening = false, conversion, detector;
-let resultUrl, resultBlob, sourceUrl, cancelled = false, previewQueue = Promise.resolve(), epoch = 0, drawing;
+let resultUrl, resultBlob, shareFile, sharing = false, sourceUrl, cancelled = false, previewQueue = Promise.resolve(), epoch = 0, drawing;
 let playing = false, startingPlayback = false, animation, liveDetector, livePending = false, playbackEpoch = 0;
 let previewAudioContext, speechSource, speechBuffer, speechChannels, speechAbort, speechPromise;
 let previewMuted = false, reviewView = 'edited';
@@ -81,7 +81,7 @@ function restore(direction) {
 function invalidate() {
   if (reviewView === 'export') setReview('edited');
   if (resultUrl) URL.revokeObjectURL(resultUrl);
-  resultUrl = null; resultBlob=null; $('download').hidden = true; $('download').removeAttribute('href');
+  resultUrl = null; resultBlob=null; shareFile=null; $('save-actions').hidden=true; $('share-export').hidden=true; $('save-hint').hidden=true; $('download').hidden = true; $('download').removeAttribute('href');
   $('resultvideo').pause(); $('resultvideo').removeAttribute('src'); $('resultvideo').load(); $('resultvideo').hidden = true; $('resultimage').hidden=true; $('resultimage').removeAttribute('src'); $('view-export').disabled=true;
 }
 function setBusy(value) {
@@ -205,8 +205,18 @@ async function load(selected) {
   } catch (error) { input?.dispose(); input = null; sink = null; bitmap?.close(); bitmap = null; file = null; $('meta').textContent = 'UNSUPPORTED'; say(error.message, true); }
   finally { opening = false; }
 }
-$('choose').onclick = $('empty').onclick = () => $('file').click();
-$('file').onchange = () => { const selected = $('file').files[0]; $('file').value = ''; void load(selected); };
+$('choose').onclick = $('empty').onclick = () => {
+  if (busy || opening) return;
+  if (matchMedia('(pointer: coarse)').matches) $('import-dialog').showModal();
+  else $('file').click();
+};
+$('close-import').onclick=()=>$('import-dialog').close();
+for (const button of document.querySelectorAll('[data-picker]')) button.onclick=()=>{
+  $('import-dialog').close(); $(button.dataset.picker).click();
+};
+for (const id of ['file','library','camera-photo','camera-video']) $(id).onchange=()=>{
+  const selected=$(id).files[0]; $(id).value=''; void load(selected);
+};
 for (const type of ['dragenter', 'dragover']) $('stage').addEventListener(type, event => { event.preventDefault(); if (!busy) $('stage').classList.add('dragover'); });
 $('stage').addEventListener('dragleave', () => $('stage').classList.remove('dragover'));
 $('stage').addEventListener('drop', event => { event.preventDefault(); $('stage').classList.remove('dragover'); void load(event.dataTransfer.files[0]); });
@@ -248,6 +258,12 @@ function publish(blob, extension) {
   $('download').textContent=Capacitor.isNativePlatform()?'Share export':'Download';
   resultUrl = URL.createObjectURL(blob);
   $('download').href = resultUrl; $('download').download = `${file.name.replace(/\.[^.]+$/, '')}-defaced.${extension}`; $('download').hidden = false;
+  shareFile = new File([blob], $('download').download, {type:blob.type});
+  let canShare=false;
+  try { canShare=!!navigator.share && !!navigator.canShare?.({files:[shareFile]}); } catch {}
+  $('save-actions').hidden=false;
+  $('share-export').hidden=!canShare || Capacitor.isNativePlatform();
+  $('save-hint').hidden=!canShare || Capacitor.isNativePlatform();
   if (sink) $('resultvideo').src = resultUrl; else $('resultimage').src=resultUrl;
   updateControls(); setReview('export');
   say(`Ready · ${(blob.size / 1024 / 1024).toFixed(1)} MB`);
@@ -326,6 +342,16 @@ $('export').onclick = async () => {
     if (cancelled) say('Cancelled. No file was created.');
   }
 };
+$('share-export').onclick = async () => {
+  if (!shareFile || sharing) return;
+  sharing=true; $('share-export').disabled=true;
+  try {
+    // Invoke synchronously from the tap: rendering must not consume user activation.
+    await navigator.share({files:[shareFile]});
+  } catch(error) {
+    if(error.name !== 'AbortError') say('Sharing is unavailable. Use Download, or try MP4 for video.',true);
+  } finally { sharing=false; $('share-export').disabled=false; }
+};
 $('download').onclick = async event => {
   if (!Capacitor.isNativePlatform() || !resultBlob) return;
   event.preventDefault();
@@ -348,7 +374,7 @@ updateControls();
 // The CSS timeline also dismisses the intro if the application fails to load.
 const intro = $('startup');
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-const editorSurfaces = [document.querySelector('header'), document.querySelector('main')];
+const editorSurfaces = [document.querySelector('header'), document.querySelector('main'), document.querySelector('.site-footer')];
 let introTimer;
 function dismissIntro() {
   const restoreFocus = intro.contains(document.activeElement);
